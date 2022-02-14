@@ -5,6 +5,47 @@ input_path = 'input/'
 output_path = 'output'
 
 
+class AppFrameWorkType:
+    FLUTTER = "Flutter"
+    REACT_NATIVE = "React Native"
+    CORDOVA = "Cordova"
+    NATIVE = "Native"
+
+
+class TechFileStructure:
+    def __init__(self, name, directories):
+        self.name = name
+        self.directories = directories
+    pass
+
+
+tech_list = [
+    TechFileStructure(name="Flutter", directories=[
+        "libflutter.so"
+    ]),
+    TechFileStructure(name="React Native", directories=[
+        "libreactnativejni.so",
+        "assets/index.android.bundle",
+    ]),
+    TechFileStructure(name="Cordova", directories=[
+        "assets/www/index.html",
+        "assets/www/cordova.js",
+        "assets/www/cordova_plugins.js"
+    ]),
+    TechFileStructure(name="Xamarin", directories=[
+        "/assemblies/Sikur.Monodroid.dll",
+        "/assemblies/Sikur.dll",
+        "/assemblies/Xamarin.Mobile.dll",
+        "/assemblies/mscorlib.dll",
+        "libmonodroid.so",
+        "libmonosgen-2.0.so",
+    ]),
+    TechFileStructure(name="Native", directories=[
+
+    ])
+]
+
+
 def main():
     app_name = "beetv.apk"
     with ZipFile(input_path + app_name, 'r') as zipObject:
@@ -41,14 +82,8 @@ def main():
             # XAMARIN
             # /assemblies/Sikur.Monodroid.dll
             # /assemblies/Sikur.dll
-            # /assemblies/Xamarin.Android.Support.v13.dll
-            # /assemblies/Xamarin.Android.Support.v4.dll
-            # /assemblies/Xamarin.Android.Support.v7.AppCompat.dll
-            # /assemblies/Xamarin.Android.Support.v7.CardView.dll
-            # /assemblies/Xamarin.Android.Support.v7.RecyclerView.dll
             # /assemblies/Xamarin.Mobile.dll
             # /assemblies/mscorlib.dll
-           
             # libmonodroid.so
             # libmonosgen-2.0.so
             xamarin_test_1 = file_name.find(
