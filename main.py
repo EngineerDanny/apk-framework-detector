@@ -10,10 +10,10 @@ class FrameWork:
     REACT_NATIVE = "React Native"
     CORDOVA = "Cordova"
     XAMARIN = "Xamarin"
-    NATIVE = "Native(Java/Kotlin)"
+    NATIVE = "Native (Java/Kotlin) "
 
 
-class FileStructure:
+class Technology:
     def __init__(self, framework, directories):
         self.framework = framework
         self.directories = directories
@@ -21,20 +21,20 @@ class FileStructure:
 
 
 tech_list = [
-    FileStructure(
+    Technology(
         framework=FrameWork.FLUTTER,
         directories=[
             "libflutter.so"
         ]
     ),
-    FileStructure(
+    Technology(
         framework=FrameWork.REACT_NATIVE,
         directories=[
             "libreactnativejni.so",
             "assets/index.android.bundle",
         ]
     ),
-    FileStructure(
+    Technology(
         framework=FrameWork.CORDOVA,
         directories=[
             "assets/www/index.html",
@@ -42,7 +42,7 @@ tech_list = [
             "assets/www/cordova_plugins.js"
         ]
     ),
-    FileStructure(
+    Technology(
         framework=FrameWork.XAMARIN,
         directories=[
             "/assemblies/Sikur.Monodroid.dll",
@@ -60,7 +60,8 @@ def main():
     app_name = "fh.apk"
     with ZipFile(input_path + app_name, 'r') as zipObject:
         file_names = zipObject.namelist()
-        zipObject.extractall('output')
+        # Uncomment the line below to extract the list of files in the apk
+        # zipObject.extractall('output')
 
         for file_name in file_names:
             # loop through tech_list and check if file_name is in any of the directories
@@ -68,15 +69,15 @@ def main():
                 for directory in tech.directories:
                     if file_name.find(directory) != -1:
                         zipObject.close()
-                        print(f"{file_name} is in {tech.framework}")
-                        return tech.framework
+                        print(f"App was written in {tech.framework}")
+                        return
                 else:
                     continue
-                
-        # if no framework is found, return Native        
+
+        # if no framework is found, return Native
         zipObject.close()
-        return FrameWork.NATIVE
+        print(f"App was written in {FrameWork.NATIVE}")
 
 
-find_framework = main()
-print(find_framework)
+# Run the main function
+main()
