@@ -9,9 +9,9 @@ class AppFrameWorkType:
     FLUTTER = "Flutter"
     REACT_NATIVE = "React Native"
     CORDOVA = "Cordova"
+    XAMARIN = "Xamarin"
     NATIVE = "Native"
-
-
+    
 class TechFileStructure:
     def __init__(self, name, directories):
         self.name = name
