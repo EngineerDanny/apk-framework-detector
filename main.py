@@ -1,8 +1,12 @@
+"""
+APK FRAMEWORK DETECTOR
+Author  :   Daniel Agyapong
+Website :   https://engineerdanny.me
+Date    :   February, 2022
+"""
+
+import sys
 from zipfile import ZipFile
-
-
-input_path = 'input/'
-output_path = 'output'
 
 
 class FrameWork:
@@ -17,7 +21,6 @@ class Technology:
     def __init__(self, framework, directories):
         self.framework = framework
         self.directories = directories
-    pass
 
 
 tech_list = [
@@ -55,12 +58,15 @@ tech_list = [
     ),
 ]
 
+input_path = 'input/'
+output_path = 'output'
+
 
 def main():
-    app_name = "fh.apk"
-    with ZipFile(input_path + app_name, 'r') as zipObject:
+    app_name = get_app_name()
+    with ZipFile(app_name, 'r') as zipObject:
         file_names = zipObject.namelist()
-        # Uncomment the line below to extract the list of files in the apk
+        # Uncomment the line below to extract the list of files in the apk to the output directory
         # zipObject.extractall('output')
 
         for file_name in file_names:
@@ -77,6 +83,17 @@ def main():
         # if no framework is found, return Native
         zipObject.close()
         print(f"App was written in {FrameWork.NATIVE}")
+
+
+def get_app_name():
+    args = sys.argv
+    if len(args) > 1:
+        return input_path + args[1]
+    else:
+        print("Please provide an app name as an argument." +
+              "\nEg: python main.py app_name.apk")
+        # exit the program
+        exit()
 
 
 # Run the main function
