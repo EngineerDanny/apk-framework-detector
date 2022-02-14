@@ -90,6 +90,8 @@ $ `pip install -r requirements.txt` or  `pip3 install -r requirements.txt`
 
 ## :rocket: Running
 
+### NOTE: Place your apks in the input folder directory
+
 ```bash
 # Command
  $`python main.py {{app_name.apk}}` or `python3 main.py {{app_name.apk}}`
