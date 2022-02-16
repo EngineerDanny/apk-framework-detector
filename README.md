@@ -94,7 +94,7 @@ $ `pip install -r requirements.txt` or  `pip3 install -r requirements.txt`
 
 ```bash
 # Command
- $`python main.py {{app_name.apk}}` or `python3 main.py {{app_name.apk}}`
+ $`python main.py {app_name.apk}` or `python3 main.py {app_name.apk}`
 
 # Example
  $`python main.py fb.apk` or `python3 main.py fb.apk`
