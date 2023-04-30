@@ -6,7 +6,7 @@ Date    :   February, 2022
 """
 
 import sys
-from zipfile import ZipFile
+import zipfile
 
 
 class FrameWork:
@@ -64,7 +64,7 @@ output_path = 'output'
 
 def main():
     app_name = get_app_name()
-    with ZipFile(app_name, 'r') as zipObject:
+    with zipfile.ZipFile(app_name, 'r') as zipObject:
         file_names = zipObject.namelist()
         # Uncomment the line below to extract the list of files in the apk to the output directory
         # zipObject.extractall('output')
