@@ -85,7 +85,7 @@ $ git clone https://github.com/EngineerDanny/apk-framework-detector
 $ cd apk-framework-detector
 
 # Install dependencies
-$ `pip install zipfile36`
+$ pip install zipfile36
 ```
 
 ## :rocket: Running
