@@ -1,12 +1,13 @@
 """
 APK FRAMEWORK DETECTOR
-Author  :   Daniel Agyapong
-Website :   https://engineerdanny.me
-Date    :   February, 2022
+Main Author  :   Daniel Agyapong
+Contributors :   Swarup Saha
+Date         :   2024-12-19
 """
 
 import sys
-from zipfile import ZipFile
+import zipfile
+import os
 
 
 class FrameWork:
@@ -14,7 +15,7 @@ class FrameWork:
     REACT_NATIVE = "React Native"
     CORDOVA = "Cordova"
     XAMARIN = "Xamarin"
-    NATIVE = "Native (Java/Kotlin) "
+    NATIVE = "Native (Java/Kotlin)"
 
 
 class Technology:
@@ -48,10 +49,10 @@ tech_list = [
     Technology(
         framework=FrameWork.XAMARIN,
         directories=[
-            "/assemblies/Sikur.Monodroid.dll",
-            "/assemblies/Sikur.dll",
-            "/assemblies/Xamarin.Mobile.dll",
-            "/assemblies/mscorlib.dll",
+            "assemblies/Sikur.Monodroid.dll",
+            "assemblies/Sikur.dll",
+            "assemblies/Xamarin.Mobile.dll",
+            "assemblies/mscorlib.dll",
             "libmonodroid.so",
             "libmonosgen-2.0.so",
         ]
@@ -59,42 +60,49 @@ tech_list = [
 ]
 
 input_path = 'input/'
-output_path = 'output'
 
 
 def main():
     app_name = get_app_name()
-    with ZipFile(app_name, 'r') as zipObject:
-        file_names = zipObject.namelist()
-        # Uncomment the line below to extract the list of files in the apk to the output directory
-        # zipObject.extractall('output')
-
-        for file_name in file_names:
-            # loop through tech_list and check if file_name is in any of the directories
+    detected_frameworks = []
+    
+    try:
+        with zipfile.ZipFile(app_name, 'r') as zipObject:
+            file_names = zipObject.namelist()
+            
             for tech in tech_list:
-                for directory in tech.directories:
-                    if file_name.find(directory) != -1:
-                        zipObject.close()
-                        print(f"App was written in {tech.framework}")
-                        return
-                else:
-                    continue
-
-        # if no framework is found, return Native
-        zipObject.close()
-        print(f"App was written in {FrameWork.NATIVE}")
+                if any(directory in file_name for directory in tech.directories for file_name in file_names):
+                    detected_frameworks.append(tech.framework)
+            
+            if not detected_frameworks:
+                detected_frameworks.append(FrameWork.NATIVE)
+    except FileNotFoundError:
+        print(f"Error: File {app_name} not found. Ensure the path is correct.")
+        sys.exit(1)
+    except zipfile.BadZipFile:
+        print(f"Error: {app_name} is not a valid APK file.")
+        sys.exit(1)
+    
+    print_detection_results(detected_frameworks)
 
 
 def get_app_name():
     args = sys.argv
     if len(args) > 1:
-        return input_path + args[1]
+        return os.path.join(input_path, args[1])
     else:
-        print("Please provide an app name as an argument." +
-              "\nEg: python main.py app_name.apk")
-        # exit the program
-        exit()
+        print("Please provide an app name as an argument.\nEg: python main.py app_name.apk")
+        sys.exit(1)
 
 
-# Run the main function
-main()
+def print_detection_results(detected_frameworks):
+    if len(detected_frameworks) == 1:
+        print(f"App was written in {detected_frameworks[0]}")
+    else:
+        print("App uses multiple frameworks:")
+        for framework in detected_frameworks:
+            print(f"- {framework}")
+
+
+if __name__ == "__main__":
+    main()
