@@ -71,6 +71,13 @@ Use the checks and tests to detect the major framework used in writing the app.
    - NativeScript
    - Cordova
 
+3. Game Frameworks
+   - Unity
+   - Unreal
+   - Libgdx
+   - Expo
+   - Kony
+
 ## :white_check_mark: Requirements
 
 Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Python🐍](https://www.python.org) installed.

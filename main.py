@@ -1,8 +1,8 @@
 """
 APK FRAMEWORK DETECTOR
-Main Author  :   Daniel Agyapong
-Contributors :   Swarup Saha
-Date         :   2024-12-19
+Author  :   Daniel Agyapong
+Contributors:   Swarup Saha
+Date    :   2024-12-19
 """
 
 import sys
@@ -16,6 +16,11 @@ class FrameWork:
     CORDOVA = "Cordova"
     XAMARIN = "Xamarin"
     NATIVE = "Native (Java/Kotlin)"
+    UNITY = "Unity"
+    UNREAL = "Unreal Engine"
+    LIBGDX = "LibGDX"
+    EXPO = "Expo"
+    KONY = "Kony Visualizer"
 
 
 class Technology:
@@ -55,6 +60,44 @@ tech_list = [
             "assemblies/mscorlib.dll",
             "libmonodroid.so",
             "libmonosgen-2.0.so",
+        ]
+    ),
+    Technology(
+        framework=FrameWork.UNITY,
+        directories=[
+            "libunity.so",
+            "assets/bin/Data/Managed/UnityEngine.dll",
+            "assets/bin/Data/Managed/UnityEditor.dll"
+        ]
+    ),
+    Technology(
+        framework=FrameWork.UNREAL,
+        directories=[
+            "libUE4.so",
+            "assets/Unreal/UE4Game/Manifest.xml"
+        ]
+    ),
+    Technology(
+        framework=FrameWork.LIBGDX,
+        directories=[
+            "libgdx.so",
+            "assets/libgdx/lwjgl.so",
+            "assets/libgdx.jar"
+        ]
+    ),
+    Technology(
+        framework=FrameWork.EXPO,
+        directories=[
+            "assets/shell-app.bundle",
+            "assets/expo-manifest.json"
+        ]
+    ),
+    Technology(
+        framework=FrameWork.KONY,
+        directories=[
+            "assets/kony.js",
+            "assets/konyframework.js",
+            "assets/KonyApps/config.json"
         ]
     ),
 ]
