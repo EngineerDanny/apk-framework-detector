@@ -1,7 +1,7 @@
 """
 APK FRAMEWORK DETECTOR
 Author  :   Daniel Agyapong
-Contributors:   Swarup Saha
+Contributor:   Swarup Saha
 Date    :   2024-12-19
 """
 
