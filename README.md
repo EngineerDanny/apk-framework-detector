@@ -70,6 +70,12 @@ Use the checks and tests to detect the major framework used in writing the app.
    - Ionic
    - NativeScript
    - Cordova
+3. Game Frameworks
+   - Unity
+   - Unreal
+   - Libgdx
+   - Expo
+   - Kony
 
 ## :white_check_mark: Requirements
 
@@ -85,7 +91,7 @@ $ git clone https://github.com/EngineerDanny/apk-framework-detector
 $ cd apk-framework-detector
 
 # Install dependencies
-$ pip install zipfile36
+# No extra package is required for Python 3 since the script uses the built-in `zipfile` module.
 ```
 
 ## :rocket: Running
@@ -97,7 +103,15 @@ $ pip install zipfile36
  $`python main.py {app_name.apk}` or `python3 main.py {app_name.apk}`
 
 # Example
- $`python main.py fb.apk` or `python3 main.py fb.apk`
+$`python main.py fb.apk` or `python3 main.py fb.apk`
+```
+
+## :test_tube: Testing
+
+Run the test suite with [pytest](https://docs.pytest.org/).
+
+```bash
+pytest
 ```
 
 ## :memo: License
