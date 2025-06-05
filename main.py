@@ -104,28 +104,30 @@ tech_list = [
 
 input_path = 'input/'
 
-
 def main():
     app_name = get_app_name()
     detected_frameworks = []
-    
+
     try:
         with zipfile.ZipFile(app_name, 'r') as zipObject:
             file_names = zipObject.namelist()
-            
+            # Uncomment the line below to extract the list of files in the apk to the output directory
+            # zipObject.extractall('output')
+
             for tech in tech_list:
-                if any(directory in file_name for directory in tech.directories for file_name in file_names):
+                if any(any(file_name.find(directory) != -1 for file_name in file_names)
+                       for directory in tech.directories):
                     detected_frameworks.append(tech.framework)
-            
+
             if not detected_frameworks:
                 detected_frameworks.append(FrameWork.NATIVE)
     except FileNotFoundError:
-        print(f"Error: File {app_name} not found. Ensure the path is correct.")
-        sys.exit(1)
+        print(f"File {app_name} not found.")
+        return
     except zipfile.BadZipFile:
-        print(f"Error: {app_name} is not a valid APK file.")
-        sys.exit(1)
-    
+        print(f"{app_name} is not a valid APK or zip file.")
+        return
+        
     print_detection_results(detected_frameworks)
 
 
