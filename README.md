@@ -92,7 +92,7 @@ $ git clone https://github.com/EngineerDanny/apk-framework-detector
 $ cd apk-framework-detector
 
 # Install dependencies
-$ pip install zipfile36
+# No extra package is required for Python 3 since the script uses the built-in `zipfile` module.
 ```
 
 ## :rocket: Running
